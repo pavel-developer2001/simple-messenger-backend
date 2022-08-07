@@ -11,11 +11,11 @@ export class ChatMessagesService {
     private repository: Repository<ChatMessagesEntity>,
   ) {}
 
-  async create(createChatMessageDto: CreateChatMessageDto, userId: number) {
+  async create(createChatMessageDto: CreateChatMessageDto) {
     return await this.repository.save({
       ...createChatMessageDto,
       chat: { _id: createChatMessageDto.chatId },
-      user: { _id: userId },
+      user: { _id: createChatMessageDto.userId },
     });
   }
 

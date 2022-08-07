@@ -5,4 +5,6 @@ export class CreateChatMessageDto {
   message: string;
 
   chatId: number;
+
+  userId: number;
 }

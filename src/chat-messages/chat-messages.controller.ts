@@ -16,15 +16,6 @@ import { CreateChatMessageDto } from './dto/create-chat-message.dto';
 export class ChatMessagesController {
   constructor(private readonly chatMessagesService: ChatMessagesService) {}
 
-  @UseGuards(JwtAuthGuard)
-  @Post()
-  create(
-    @Body() createChatMessageDto: CreateChatMessageDto,
-    @User() userId: number,
-  ) {
-    return this.chatMessagesService.create(createChatMessageDto, userId);
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.chatMessagesService.findOne(+id);
