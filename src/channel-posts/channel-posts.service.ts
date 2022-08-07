@@ -11,11 +11,12 @@ export class ChannelPostsService {
     private repository: Repository<ChannelPostsEntity>,
   ) {}
   async create(createChannelPostDto: CreateChannelPostDto, userId: number) {
-    return await this.repository.save({
+    const create = await this.repository.save({
       ...createChannelPostDto,
       channel: { _id: createChannelPostDto.channelId },
       user: { _id: userId },
     });
+    return await this.repository.findOne({ where: { _id: create._id } });
   }
 
   async findOne(id: number) {

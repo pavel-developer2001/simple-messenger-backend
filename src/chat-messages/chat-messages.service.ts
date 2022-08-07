@@ -12,11 +12,12 @@ export class ChatMessagesService {
   ) {}
 
   async create(createChatMessageDto: CreateChatMessageDto) {
-    return await this.repository.save({
+    const create = await this.repository.save({
       ...createChatMessageDto,
       chat: { _id: createChatMessageDto.chatId },
       user: { _id: createChatMessageDto.userId },
     });
+    return await this.repository.findOne({ where: { _id: create._id } });
   }
 
   async findOne(id: number) {
